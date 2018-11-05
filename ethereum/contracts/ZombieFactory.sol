@@ -13,6 +13,11 @@ contract ZombieFactory is Ownable {
         string name;
         uint dna;
         uint32 level;
+        /**
+         * The goal is to add a "cooldown period", an amount of time a zombie 
+         * has to wait after feeding or attacking before it's allowed to feed
+         * / attack again
+         */
         uint32 readyTime;
     }
 
