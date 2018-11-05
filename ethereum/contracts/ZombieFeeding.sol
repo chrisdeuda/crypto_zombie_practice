@@ -3,7 +3,6 @@ pragma solidity ^0.4.19;
 // put import statement here
 
 import "./ZombieFactory.sol";
-
 contract KittyInterface {
     function getKitty(uint256 _id) external view returns (
         bool isGestating,
@@ -25,7 +24,7 @@ contract ZombieFeeding is ZombieFactory {
     // Initialize kittyContract here using `ckAddress` from above
     KittyInterface kittyContract;
     
-    function setKittyContractAddress(address _address) external{
+    function setKittyContractAddress(address _address) external onlyOwner{
       kittyContract = KittyInterface(_address);
     }
 
