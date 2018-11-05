@@ -13,13 +13,16 @@ contract ZombieFactory is Ownable {
         string name;
         uint dna;
         uint32 level;
-        /**
-         * The goal is to add a "cooldown period", an amount of time a zombie 
-         * has to wait after feeding or attacking before it's allowed to feed
-         * / attack again
-         */
+        
         uint32 readyTime;
     }
+
+    /**
+    * The goal is to add a "cooldown period", an amount of time a zombie 
+    * has to wait after feeding or attacking before it's allowed to feed
+    * / attack again
+    */
+    uint cooldownTime = 1 days;
 
     Zombie[] public zombies;
 
@@ -27,7 +30,7 @@ contract ZombieFactory is Ownable {
     mapping (address => uint) ownerZombieCount ;
 
     function _createZombie(string _name, uint _dna) internal {
-        uint id = zombies.push(Zombie(_name, _dna)) - 1;
+        uint id = zombies.push(Zombie(_name, _dna, 1, uint32(now + cooldownTime))) - 1;
         
         zombieToOwner[id] = msg.sender;
         ownerZombieCount[msg.sender]++;
