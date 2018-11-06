@@ -21,6 +21,10 @@ contract ZombieHelper is ZombieFeeding {
         owner.transfer(this.balance);
     }
     
+    function setLevelUpFee( uint _fee) external onlyOwner{
+        levelUpFee = _fee;
+    }
+    
     function changeName(uint _zombieId, string _newName) external aboveLevel(2, _zombieId) {
         require(msg.sender == zombieToOwner[_zombieId]);
         zombies[_zombieId].name = _newName;
